@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Rock Paper Scissors </title>
+        <style>
+            body{
+                background-color: rgb(25,25,25);
+                color: white;
+                font-family: Arial;
+
+            }
+            .title{
+                font-size: 30px;
+                font-weight: bold;
+                }
+            .reset{
+                background-color: white;
+                border: none;
+                font-size: 15px;
+                padding: 8px 15px;
+                cursor: pointer;
+                
+            }
+            .img{
+                height: 50px;}
+
+            .buton{
+                width: 120px;
+                height: 120px;
+                border-radius: 60px;
+                border: 3px solid white;
+                background-color: transparent;
+                margin-right: 10px;
+                cursor: pointer;
+
+            }
+            .result{
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 50px;
+
+            }
+            .scoree{
+                margin-top: 50px;
+                font-size: 20px;
+            }
+                            
+  
+            
+        </style>
+
+    </head>
+
+
+<body>
+    <p class="title"> Rock Paper Scissors</p>
+    
+    <button class="buton" onclick="
+                playgame('Rock'); "
+        ><img src="pictures/rock-emoji.png" class="img"></button>
+
+
+    <button  class="buton" onclick="
+                playgame('Paper'); "
+        ><img src="pictures/paper-emojii.png"class="img" ></button>
+
+    <button class="buton" onclick=" 
+        playgame('Scissors');"
+   
+        ><img src="pictures/scissors-emoji.png" class="img"></button>
+    
+    <p class="result"> </p>
+    <p class="moves" > </p>
+    
+    <p class="scoree">  </p> 
+    
+    
+    <button class="reset" onclick="score.Wins=0; score.Losses=0; score.Ties=0;
+    
+     localStorage.removeItem('score');  
+     document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+     
+
+       
+    "> Reset Score</button>
+    
+    
+
+    <script>
+        
+        let score= JSON.parse(localStorage.getItem('score')) ||
+                    {
+                        Wins : 0,
+                        Losses : 0,
+                        Ties :  0
+                    };
+        
+    document.querySelector('.scoree').innerHTML = `Wins: ${score.Wins}, Losses: ${score.Losses}, Ties: ${score.Ties}`;
+
+
+                
+
+        //              or you can do whats written below
+        // if (score === null)
+        // {
+        //     score={
+        //                 Wins : 0,
+        //                 Losses : 0,
+        //                 Ties :  0
+        //             }
+
+        // }
+ 
+
+        function playgame(move){
+            
+            var options = ['Rock','Paper','Scissors'];
+        
+            var randomIndex = Math.floor(Math.random() * options.length);
+        
+        
+            var x = options[randomIndex];
+            
+            if (move ==='Rock'){
+                if (x==='Paper'){
+                    score.Losses+=1;
+                    document.querySelector('.result').innerHTML= `You Lose`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/rock-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+                    
+                    // alert(`You picked Rock,Computer picked ${x}.You Lose \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+
+
+                }
+                else if (x==='Scissors'){
+                    score.Wins+=1;
+                    document.querySelector('.result').innerHTML= `You Win`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/rock-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                    // alert(`You picked Rock,Computer picked ${x}.You Win \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                }
+                else if (x=== 'Rock'){
+                    score.Ties+=1;
+                    document.querySelector('.result').innerHTML= `Tie`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/rock-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                    // alert(`You picked Rock,Computer picked ${x}.Tie \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                }}
+
+            else if(move === 'Paper'){
+                
+                    if (x==='Rock'){
+                        score.Wins+=1;
+                        document.querySelector('.result').innerHTML= `You Win`;
+                        document.querySelector('.moves').innerHTML= `You <img src="pictures/paper-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                        document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+
+                    // alert(`You picked Paper,Computer picked ${x}.You Win \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+
+                    }
+                    else if (x==='Scissors'){
+                        score.Losses+=1;
+                        document.querySelector('.result').innerHTML= `You Lose`;
+                        document.querySelector('.moves').innerHTML= `You <img src="pictures/paper-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                        document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                    // alert(`You picked Paper,Computer picked ${x}.You Lose \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                        }
+                    else{
+                        score.Ties+=1;
+                        document.querySelector('.result').innerHTML= `Tie`;
+                        document.querySelector('.moves').innerHTML= `You <img src="pictures/paper-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                        document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                    //     alert(`You picked Paper,Computer picked ${x}.Draw \n
+                    // Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                    }
+                }
+            else{
+                let a= 'Scissors';
+                if (x==='Paper'){
+                    score.Wins+=1;
+                    document.querySelector('.result').innerHTML= `You Win`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/scissors-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                // alert(`You picked ${a},Computer picked ${x}.You Win \n
+                //     Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+
+                }
+                else if (x==='Rock'){
+                    score.Losses+=1;
+                    document.querySelector('.result').innerHTML= `You Lose`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/scissors-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+                }
+                // alert(`You picked ${a},Computer picked ${x}.You Lose \n
+                //     Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                // } 
+                else{
+                    score.Ties+=1;
+                    document.querySelector('.result').innerHTML= `Tie`;
+                    document.querySelector('.moves').innerHTML= `You <img src="pictures/scissors-emoji.png" class="img"> <img src="pictures/${x}-emoji.png" class="img">Computer`
+                    document.querySelector('.scoree').innerHTML= `Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `
+
+                // alert(`You picked ${a},Computer picked ${x}.Tie \n
+                //     Wins:${score.Wins}, Losses:${score.Losses},Ties:${score.Ties} `);
+                }}
+            localStorage.setItem('score',JSON.stringify(score));
+
+            }
+            
+
+    </script>
+
+</body>
+</html>
